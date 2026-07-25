@@ -1,16 +1,25 @@
 # Drishtilok (दृष्टिलोक) — West MP news
 
-Hindi digital news portal for **Indore Division**, **Ujjain Division** (including Dewas), and **statewide Madhya Pradesh**.
+Hindi digital news portal for **Indore Division**, **Ujjain Division** (including Dewas), **statewide Madhya Pradesh**, and **India** national stories.
 
-## Run
+**Repo:** https://github.com/mimohcsg/drishtilok-news
+
+## Run locally
 
 ```bash
-cd drishtilok-news
 npm install
 npm start
 ```
 
 Open [http://localhost:4173](http://localhost:4173).
+
+## Beta deploy (Render)
+
+One-click free host (Node server required — GitHub Pages cannot run the live RSS API):
+
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/mimohcsg/drishtilok-news)
+
+Or in the [Render dashboard](https://dashboard.render.com/) → **New** → **Blueprint** → select this repo (`render.yaml`).
 
 ## Coverage
 
@@ -19,6 +28,7 @@ Open [http://localhost:4173](http://localhost:4173).
 | **इंदौर संभाग** | इंदौर, धार, झाबुआ, अलीराजपुर, खरगोन, बड़वानी, खंडवा, बुरहानपुर |
 | **उज्जैन संभाग** | उज्जैन, देवास, रतलाम, मंदसौर, नीमच, शाजापुर, आगर-मालवा |
 | **मध्य प्रदेश** | Statewide MP politics, admin, and general news |
+| **भारत** | National / India stories mixed into the front page |
 
 ## API
 
@@ -28,6 +38,7 @@ Open [http://localhost:4173](http://localhost:4173).
 - `GET /api/news?lang=hi&district=dewas`
 - `GET /api/news?lang=hi&district=mp`
 - `GET /api/region`
+- `GET /api/health`
 
 Primary feeds: दैनिक भास्कर (मप्र), अमर उजाला (मप्र), नई दुनिया (मप्र).
 
@@ -35,7 +46,7 @@ Primary feeds: दैनिक भास्कर (मप्र), अमर उ�
 
 Daily e-paper compiles all stories gathered during the day (IST) and **locks at 11:59 PM**.
 
-- Page: [http://localhost:4173/epaper.html](http://localhost:4173/epaper.html)
+- Page: `/epaper.html`
 - API: `GET /api/epaper?lang=hi&date=YYYY-MM-DD`
 - Dates: `GET /api/epaper/dates`
 - Use **प्रिंट / PDF** in the browser to save or print the edition

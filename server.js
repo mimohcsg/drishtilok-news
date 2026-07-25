@@ -1191,7 +1191,7 @@ app.get("/api/news/article", async (req, res) => {
 
 app.use(express.static(path.join(__dirname), { extensions: ["html"] }));
 
-app.listen(PORT, async () => {
+app.listen(PORT, "0.0.0.0", async () => {
   console.log(`दृष्टिलोक running at http://localhost:${PORT}`);
   try {
     await refreshNews(true);
