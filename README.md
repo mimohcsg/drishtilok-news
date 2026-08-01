@@ -13,13 +13,17 @@ npm start
 
 Open [http://localhost:4173](http://localhost:4173).
 
-## Beta deploy (Render)
+## Deploy (Render)
+
+**Expected live URL after first deploy:** https://satyavrat-news.onrender.com
 
 One-click free host (Node server required — GitHub Pages cannot run the live RSS API):
 
 [![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/mimohcsg/drishtilok-news)
 
-Or in the [Render dashboard](https://dashboard.render.com/) → **New** → **Blueprint** → select this repo (`render.yaml`).
+Or in the [Render dashboard](https://dashboard.render.com/) → **New** → **Blueprint** → select this repo (`render.yaml` → service `satyavrat-news`).
+
+Code is on `main` (`mimohcsg/drishtilok-news`). Auto-deploys apply once the Blueprint is connected.
 
 ## Coverage
 
