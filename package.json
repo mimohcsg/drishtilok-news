@@ -2,7 +2,7 @@
   "name": "drishtilok-news",
   "version": "1.0.0",
   "private": true,
-  "description": "दृष्टिलोक — Hindi news portal with live RSS aggregation",
+  "description": "सत्यव्रत — Hindi news portal with live RSS aggregation",
   "scripts": {
     "start": "node server.js",
     "dev": "node server.js"

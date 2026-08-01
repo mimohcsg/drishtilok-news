@@ -99,9 +99,9 @@
   }
 
   function renderArticle(article) {
-    document.title = `${article.title} | दृष्टिलोक`;
-    const brand = hi ? "दृष्टिलोक" : "Drishtilok";
-    const byline = hi ? "दृष्टिलोक डेस्क" : "Drishtilok Desk";
+    document.title = `${article.title} | सत्यव्रत`;
+    const brand = hi ? "सत्यव्रत" : "Satyavrat";
+    const byline = hi ? "सत्यव्रत डेस्क" : "Satyavrat Desk";
     const dek = shouldShowDek(article)
       ? `<p class="article-dek">${escapeHtml(article.summary)}</p>`
       : "";
@@ -130,8 +130,8 @@
       <footer class="article-footer">
         <p>${
           hi
-            ? "यह कवरेज दृष्टिलोक न्यूज़ पोर्टल पर प्रकाशित है।"
-            : "This coverage is published on the Drishtilok news portal."
+            ? "यह कवरेज सत्यव्रत न्यूज़ पोर्टल पर प्रकाशित है।"
+            : "This coverage is published on the Satyavrat news portal."
         }</p>
       </footer>
     `;
@@ -153,7 +153,7 @@
               : `<div class="related-thumb related-thumb-empty"></div>`
           }
           <h3>${escapeHtml(item.title)}</h3>
-          <span class="story-source">${hi ? "दृष्टिलोक" : "Drishtilok"}</span>
+          <span class="story-source">${hi ? "सत्यव्रत" : "Satyavrat"}</span>
         </a>
       </article>`
       )

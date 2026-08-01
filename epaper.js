@@ -126,10 +126,10 @@
       <footer class="epaper-footer">
         <p>${
           hi
-            ? "यह ई-पेपर दृष्टिलोक द्वारा दिन भर एकत्र समाचारों से तैयार किया गया है। अंतिम संस्करण रात 11:59 (IST) पर लॉक होता है।"
-            : "This e-paper is generated from stories gathered by Drishtilok during the day. The final edition locks at 11:59 PM IST."
+            ? "यह ई-पेपर सत्यव्रत द्वारा दिन भर एकत्र समाचारों से तैयार किया गया है। अंतिम संस्करण रात 11:59 (IST) पर लॉक होता है।"
+            : "This e-paper is generated from stories gathered by Satyavrat during the day. The final edition locks at 11:59 PM IST."
         }</p>
-        <p>© ${new Date().getFullYear()} दृष्टिलोक डिजिटल</p>
+        <p>© ${new Date().getFullYear()} सत्यव्रत डिजिटल</p>
       </footer>
     `;
     root.setAttribute("aria-busy", "false");

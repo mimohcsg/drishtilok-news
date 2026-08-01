@@ -227,7 +227,7 @@ const FEEDS = [
 const parser = new Parser({
   timeout: 12000,
   headers: {
-    "User-Agent": "DrishtilokNewsBot/1.0 (+local aggregator; respectful fetch)",
+    "User-Agent": "SatyavratNewsBot/1.0 (+local aggregator; respectful fetch)",
     Accept: "application/rss+xml, application/xml, text/xml, */*",
   },
   // Corporate SSL inspection often injects a local CA; allow feed fetch in that case.
@@ -402,7 +402,7 @@ function toPublicItem(item, lang) {
     publishedAt: item.publishedAt,
     lang: item.lang,
     category: lang === "en" ? item.categoryEn : item.category,
-    portal: "दृष्टिलोक",
+    portal: "सत्यव्रत",
     region: "mp-west",
     district: item.districtId || null,
     districtLabel: districtMeta ? (lang === "en" ? districtMeta.en : districtMeta.hi) : null,
@@ -849,8 +849,8 @@ function buildEpaperEdition(dayKey, lang = "hi") {
   const more = items.filter((i) => !used.has(i.id));
 
   return {
-    brand: "दृष्टिलोक",
-    title: lang === "en" ? "Drishtilok E-Paper" : "दृष्टिलोक ई-पेपर",
+    brand: "सत्यव्रत",
+    title: lang === "en" ? "Satyavrat E-Paper" : "सत्यव्रत ई-पेपर",
     focus: lang === "en" ? COVERAGE.labelEn : COVERAGE.labelHi,
     dayKey,
     dateLabel: formatIstLong(dayKey, lang),
@@ -937,7 +937,7 @@ async function enrichArticle(item, { force = false } = {}) {
       fullFetched: true,
     };
   } catch (err) {
-    console.warn(`[drishtilok] full article fetch failed: ${item.sourceId}`, err.message);
+    console.warn(`[satyavrat] full article fetch failed: ${item.sourceId}`, err.message);
     const cleaned = buildCleanArticle(item.title, item.bodyHtml, item.bodyText || item.summary);
     return {
       ...item,
@@ -982,7 +982,7 @@ async function refreshNews(force = false) {
         source: feed.name,
         message: result.reason?.message || "Fetch failed",
       });
-      console.warn(`[drishtilok] feed failed: ${feed.id}`, result.reason?.message);
+      console.warn(`[satyavrat] feed failed: ${feed.id}`, result.reason?.message);
     }
   });
 
@@ -1015,11 +1015,11 @@ async function refreshNews(force = false) {
   try {
     archiveDailyNews(deduped);
   } catch (err) {
-    console.warn("[drishtilok] e-paper archive failed", err.message);
+    console.warn("[satyavrat] e-paper archive failed", err.message);
   }
 
   console.log(
-    `[drishtilok] refreshed ${deduped.length} stories from ${sources.filter((s) => s.ok).length}/${FEEDS.length} sources`
+    `[satyavrat] refreshed ${deduped.length} stories from ${sources.filter((s) => s.ok).length}/${FEEDS.length} sources`
   );
   return cache;
 }
@@ -1042,7 +1042,7 @@ app.get("/api/epaper", async (req, res) => {
     res.set("Cache-Control", "public, max-age=60");
     res.json(edition);
   } catch (err) {
-    console.error("[drishtilok] /api/epaper error", err);
+    console.error("[satyavrat] /api/epaper error", err);
     res.status(500).json({
       error: "ई-पेपर तैयार नहीं हो सका",
       message: err.message,
@@ -1055,7 +1055,7 @@ app.get("/api/epaper/dates", (_req, res) => {
   const dates = listEpaperDates();
   if (!dates.includes(today)) dates.unshift(today);
   res.json({
-    brand: "दृष्टिलोक",
+    brand: "सत्यव्रत",
     timezone: "Asia/Kolkata",
     cutoff: "23:59",
     today,
@@ -1066,7 +1066,7 @@ app.get("/api/epaper/dates", (_req, res) => {
 app.get("/api/health", (_req, res) => {
   res.json({
     ok: true,
-    brand: "दृष्टिलोक",
+    brand: "सत्यव्रत",
     focus: COVERAGE.labelHi,
     cacheExpiresAt: cache.expiresAt || null,
   });
@@ -1074,7 +1074,7 @@ app.get("/api/health", (_req, res) => {
 
 app.get("/api/region", (_req, res) => {
   res.json({
-    brand: "दृष्टिलोक",
+    brand: "सत्यव्रत",
     focus: COVERAGE,
   });
 });
@@ -1114,7 +1114,7 @@ app.get("/api/news", async (req, res) => {
 
     res.set("Cache-Control", "public, max-age=60");
     res.json({
-      brand: "दृष्टिलोक",
+      brand: "सत्यव्रत",
       focus: lang === "en" ? COVERAGE.labelEn : COVERAGE.labelHi,
       lang,
       district: district || "all",
@@ -1137,7 +1137,7 @@ app.get("/api/news", async (req, res) => {
       items: filtered.map((item) => toPublicItem(item, lang)),
     });
   } catch (err) {
-    console.error("[drishtilok] /api/news error", err);
+    console.error("[satyavrat] /api/news error", err);
     res.status(500).json({
       error: "समाचार लोड नहीं हो सके",
       message: err.message,
@@ -1170,7 +1170,7 @@ app.get("/api/news/article", async (req, res) => {
 
     res.set("Cache-Control", "public, max-age=60");
     res.json({
-      brand: "दृष्टिलोक",
+      brand: "सत्यव्रत",
       article: {
         ...toPublicItem(full, full.lang),
         summary: full.summary,
@@ -1181,7 +1181,7 @@ app.get("/api/news/article", async (req, res) => {
       related,
     });
   } catch (err) {
-    console.error("[drishtilok] /api/news/article error", err);
+    console.error("[satyavrat] /api/news/article error", err);
     res.status(500).json({
       error: "खबर लोड नहीं हो सकी",
       message: err.message,
@@ -1192,15 +1192,15 @@ app.get("/api/news/article", async (req, res) => {
 app.use(express.static(path.join(__dirname), { extensions: ["html"] }));
 
 app.listen(PORT, "0.0.0.0", async () => {
-  console.log(`दृष्टिलोक running at http://localhost:${PORT}`);
+  console.log(`सत्यव्रत running at http://localhost:${PORT}`);
   try {
     await refreshNews(true);
   } catch (err) {
-    console.warn("[drishtilok] initial refresh failed", err.message);
+    console.warn("[satyavrat] initial refresh failed", err.message);
   }
   setInterval(() => {
     refreshNews(true).catch((err) => {
-      console.warn("[drishtilok] scheduled refresh failed", err.message);
+      console.warn("[satyavrat] scheduled refresh failed", err.message);
     });
   }, CACHE_MS);
 });

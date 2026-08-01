@@ -1,4 +1,4 @@
-# Drishtilok (दृष्टिलोक) — West MP news
+# Satyavrat (सत्यव्रत) — West MP news
 
 Hindi digital news portal for **Indore Division**, **Ujjain Division** (including Dewas), **statewide Madhya Pradesh**, and **India** national stories.
 

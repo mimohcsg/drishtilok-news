@@ -207,8 +207,8 @@
         (hi ? "मप्र पश्चिम" : "West MP");
       tags.push(place);
       heroKicker.textContent = hi
-        ? `लाइव · दृष्टिलोक · ${tags.join(" · ")}`
-        : `Live · Drishtilok · ${tags.join(" · ")}`;
+        ? `लाइव · सत्यव्रत · ${tags.join(" · ")}`
+        : `Live · Satyavrat · ${tags.join(" · ")}`;
     }
     if (heroLink) {
       heroLink.href = articleHref(item);
@@ -298,7 +298,7 @@
       ? `style="background-image:url('${escapeHtml(item.image)}');background-size:cover;background-position:center;"`
       : "";
     const summary = feature && item.summary ? `<p>${escapeHtml(item.summary)}</p>` : "";
-    const brand = hi ? "दृष्टिलोक" : "Drishtilok";
+    const brand = hi ? "सत्यव्रत" : "Satyavrat";
     const fallbackCat = hi ? "टॉप" : "Top";
     return `
       <article class="story${feature ? " story-feature" : ""}">
