@@ -231,24 +231,10 @@
       <div class="container">
         <div class="section-head">
           <h2 id="bizTitle">बिजनेस</h2>
-          <a class="see-all" href="#">सभी खबरें</a>
+          <a class="see-all" href="#business">लाइव</a>
         </div>
-        <div class="biz-grid">
-          <article>
-            <span class="chip">कॉर्पोरेट</span>
-            <h3><a href="#">BPCL को पहली तिमाही में ₹3,962 करोड़ का घाटा; रेवेन्यू 23% बढ़ा</a></h3>
-            <p>कच्चे तेल के दाम बढ़ने का असर, लेकिन टॉपलाइन मजबूत।</p>
-          </article>
-          <article>
-            <span class="chip">बाजार</span>
-            <h3><a href="#">अडानी पावर का मुनाफा 42% बढ़ा; नतीजों के बाद शेयर में हल्की गिरावट</a></h3>
-            <p>रेवेन्यू भी 34% ऊपर—निवेशक सतर्क।</p>
-          </article>
-          <article>
-            <span class="chip">ग्लोबल</span>
-            <h3><a href="#">अमेरिका में जेनेरिक दवाओं पर नया टैरिफ प्लान; भारत की फार्मा कंपनियों पर असर संभव</a></h3>
-            <p>दो साल 0%, फिर 100–200% ड्यूटी का प्रस्ताव चर्चा में।</p>
-          </article>
+        <div class="biz-grid" id="bizGrid" aria-busy="true">
+          <p class="feed-empty">बिजनेस खबरें लोड हो रही हैं…</p>
         </div>
       </div>
     </section>
@@ -256,34 +242,26 @@
     <section class="section container multi-cols" aria-label="और श्रेणियाँ">
       <div id="cricket">
         <h2>क्रिकेट</h2>
-        <ul class="mini-list">
-          <li><a href="#">डेविड वॉर्नर ड्रिंक-एंड-ड्राइव केस में दोषी—सज़ा पर सुनवाई बाकी</a></li>
-          <li><a href="#">शुभमन गिल नंबर-1 से एक अंक दूर; मिशेल टॉप पर कायम</a></li>
-          <li><a href="#">पूर्व खिलाड़ी पर ठगी का आरोप—FIR के आदेश</a></li>
+        <ul class="mini-list" data-topic="cricket" aria-busy="true">
+          <li>स्पोर्ट्स खबरें लोड हो रही हैं…</li>
         </ul>
       </div>
       <div id="entertainment">
         <h2>बॉलीवुड</h2>
-        <ul class="mini-list">
-          <li><a href="#">अमिताभ बच्चन ने ICU अफ़वाहों पर दी सफ़ाई—मैं बिल्कुल ठीक</a></li>
-          <li><a href="#">‘धुरंधर’ एक्ट्रेस को पुलिस ने रोका; कलाकार ने नाराज़गी जताई</a></li>
-          <li><a href="#">मूवी रिव्यू: रिश्तों और हीलिंग की कहानी—लंबी लेंथ सब्र आज़माए</a></li>
+        <ul class="mini-list" data-topic="entertainment" aria-busy="true">
+          <li>बॉलीवुड खबरें लोड हो रही हैं…</li>
         </ul>
       </div>
       <div id="lifestyle">
         <h2>लाइफस्टाइल</h2>
-        <ul class="mini-list">
-          <li><a href="#">मानसून में सुरक्षित ड्राइविंग: 15 नियम, 12 गलतियाँ</a></li>
-          <li><a href="#">चांदीपुरा वायरस: लक्षण, फैलाव और बचाव—डॉक्टर की सलाह</a></li>
-          <li><a href="#">ओरल हेल्थ के लिए लौंग: फ़ायदे और सावधानियाँ</a></li>
+        <ul class="mini-list" data-topic="lifestyle" aria-busy="true">
+          <li>लाइफस्टाइल खबरें लोड हो रही हैं…</li>
         </ul>
       </div>
       <div id="jobs">
         <h2>जॉब · एजुकेशन</h2>
-        <ul class="mini-list">
-          <li><a href="#">पूर्व अग्निवीरों के लिए CAPF में 50% आरक्षण का ऐलान</a></li>
-          <li><a href="#">एसआई भर्ती-2021: आवेदन अपडेट की लास्ट डेट आज</a></li>
-          <li><a href="#">हेल्थ डिपार्टमेंट में फिजियोथेरेपिस्ट के 20 पद</a></li>
+        <ul class="mini-list" data-topic="jobs" aria-busy="true">
+          <li>जॉब / एजुकेशन खबरें लोड हो रही हैं…</li>
         </ul>
       </div>
     </section>
@@ -292,16 +270,8 @@
       <div class="section-head">
         <h2 id="worldTitle">विदेश</h2>
       </div>
-      <div class="world-strip">
-        <article>
-          <h3><a href="#">चीन बोला—भारत ने हमारे 12 नाविकों को बचाया; एहसान नहीं भूलेंगे</a></h3>
-        </article>
-        <article>
-          <h3><a href="#">फ्रांस में कीटनाशक बैन हटा—पर्यावरण मंत्री का इस्तीफ़ा</a></h3>
-        </article>
-        <article>
-          <h3><a href="#">ललित मोदी केस अपडेट: ED जुर्माना रद्द, भारत वापसी की चर्चा</a></h3>
-        </article>
+      <div class="world-strip" id="worldStrip" aria-busy="true">
+        <p class="feed-empty">विदेश खबरें लोड हो रही हैं…</p>
       </div>
     </section>
 

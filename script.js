@@ -364,6 +364,94 @@
     }
   }
 
+  function byTopic(items, topic) {
+    return items.filter((item) => item.topic === topic);
+  }
+
+  function pickTopicStories(items, topic, limit = 3) {
+    let pool = byTopic(items, topic);
+    if (topic === "cricket") {
+      const cricketish = pool.filter((item) =>
+        /क्रिकेट|cricket|ipl|टी.?20|टेस्ट|वनडे|विश्व कप|wc |bcci|गिल|कोहली|रोहित|बल्लेबाज|गेंदबाज/i.test(
+          `${item.title} ${item.summary || ""}`
+        )
+      );
+      if (cricketish.length >= limit) pool = cricketish;
+    }
+    return [...pool]
+      .sort((a, b) => Date.parse(b.publishedAt || 0) - Date.parse(a.publishedAt || 0))
+      .slice(0, limit);
+  }
+
+  function renderTopicColumns(items) {
+    const hi = getNewsLang() === "hi";
+    const empty = hi ? "अभी खबर उपलब्ध नहीं" : "No stories right now";
+    document.querySelectorAll(".mini-list[data-topic]").forEach((list) => {
+      const topic = list.getAttribute("data-topic");
+      const picks = pickTopicStories(items, topic, 3);
+      list.setAttribute("aria-busy", "false");
+      if (!picks.length) {
+        list.innerHTML = `<li>${empty}</li>`;
+        return;
+      }
+      list.innerHTML = picks
+        .map(
+          (item) =>
+            `<li><a href="${articleHref(item)}">${escapeHtml(item.title)}</a></li>`
+        )
+        .join("");
+    });
+  }
+
+  function renderBusiness(items) {
+    const grid = document.getElementById("bizGrid");
+    if (!grid) return;
+    const hi = getNewsLang() === "hi";
+    const picks = pickTopicStories(items, "business", 3);
+    grid.setAttribute("aria-busy", "false");
+    if (!picks.length) {
+      grid.innerHTML = `<p class="feed-empty">${
+        hi ? "अभी बिजनेस खबर उपलब्ध नहीं।" : "No business stories right now."
+      }</p>`;
+      return;
+    }
+    grid.innerHTML = picks
+      .map(
+        (item) => `
+      <article>
+        <span class="chip">${escapeHtml(item.category || (hi ? "बिजनेस" : "Business"))}</span>
+        <h3><a href="${articleHref(item)}">${escapeHtml(item.title)}</a></h3>
+        <p>${escapeHtml(
+          (item.summary || "").slice(0, 120) ||
+            (hi ? "पूरी खबर पढ़ें।" : "Read full story.")
+        )}</p>
+      </article>`
+      )
+      .join("");
+  }
+
+  function renderWorld(items) {
+    const strip = document.getElementById("worldStrip");
+    if (!strip) return;
+    const hi = getNewsLang() === "hi";
+    const picks = pickTopicStories(items, "world", 3);
+    strip.setAttribute("aria-busy", "false");
+    if (!picks.length) {
+      strip.innerHTML = `<p class="feed-empty">${
+        hi ? "अभी विदेश खबर उपलब्ध नहीं।" : "No world stories right now."
+      }</p>`;
+      return;
+    }
+    strip.innerHTML = picks
+      .map(
+        (item) => `
+      <article>
+        <h3><a href="${articleHref(item)}">${escapeHtml(item.title)}</a></h3>
+      </article>`
+      )
+      .join("");
+  }
+
   async function loadNews({ force = false } = {}) {
     const lang = getNewsLang();
     const hi = lang === "hi";
@@ -406,6 +494,9 @@
       renderTopGrid([front, ...items.filter((i) => i.id !== front.id)]);
       renderLiveFeed(items, data);
       renderDistrictFeed(items, activeFilter);
+      renderTopicColumns(items);
+      renderBusiness(items);
+      renderWorld(items);
       setStatus(
         hi
           ? `लाइव · मप्र पश्चिम · ${formatTime(data.refreshedAt)} · अगला अपडेट 15 मि`

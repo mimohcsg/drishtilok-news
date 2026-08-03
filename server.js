@@ -222,6 +222,98 @@ const FEEDS = [
     limit: 16,
     requireRegionHit: true,
   },
+  // Topic rails (homepage columns) — keep feed category; do not force MP filter
+  {
+    id: "amar-sports",
+    name: "अमर उजाला",
+    nameEn: "Amar Ujala",
+    lang: "hi",
+    region: "topic",
+    topic: "cricket",
+    keepCategory: true,
+    category: "क्रिकेट",
+    categoryEn: "Cricket",
+    url: "https://www.amarujala.com/rss/sports.xml",
+    limit: 18,
+  },
+  {
+    id: "amar-entertainment",
+    name: "अमर उजाला",
+    nameEn: "Amar Ujala",
+    lang: "hi",
+    region: "topic",
+    topic: "entertainment",
+    keepCategory: true,
+    category: "बॉलीवुड",
+    categoryEn: "Bollywood",
+    url: "https://www.amarujala.com/rss/entertainment.xml",
+    limit: 18,
+  },
+  {
+    id: "amar-lifestyle",
+    name: "अमर उजाला",
+    nameEn: "Amar Ujala",
+    lang: "hi",
+    region: "topic",
+    topic: "lifestyle",
+    keepCategory: true,
+    category: "लाइफस्टाइल",
+    categoryEn: "Lifestyle",
+    url: "https://www.amarujala.com/rss/lifestyle.xml",
+    limit: 16,
+  },
+  {
+    id: "amar-jobs",
+    name: "अमर उजाला",
+    nameEn: "Amar Ujala",
+    lang: "hi",
+    region: "topic",
+    topic: "jobs",
+    keepCategory: true,
+    category: "जॉब · एजुकेशन",
+    categoryEn: "Jobs · Education",
+    url: "https://www.amarujala.com/rss/jobs.xml",
+    limit: 14,
+  },
+  {
+    id: "amar-education",
+    name: "अमर उजाला",
+    nameEn: "Amar Ujala",
+    lang: "hi",
+    region: "topic",
+    topic: "jobs",
+    keepCategory: true,
+    category: "जॉब · एजुकेशन",
+    categoryEn: "Jobs · Education",
+    url: "https://www.amarujala.com/rss/education.xml",
+    limit: 14,
+  },
+  {
+    id: "amar-business",
+    name: "अमर उजाला",
+    nameEn: "Amar Ujala",
+    lang: "hi",
+    region: "topic",
+    topic: "business",
+    keepCategory: true,
+    category: "बिजनेस",
+    categoryEn: "Business",
+    url: "https://www.amarujala.com/rss/business.xml",
+    limit: 16,
+  },
+  {
+    id: "amar-world",
+    name: "अमर उजाला",
+    nameEn: "Amar Ujala",
+    lang: "hi",
+    region: "topic",
+    topic: "world",
+    keepCategory: true,
+    category: "विदेश",
+    categoryEn: "World",
+    url: "https://www.amarujala.com/rss/world.xml",
+    limit: 16,
+  },
 ];
 
 const parser = new Parser({
@@ -414,6 +506,7 @@ function toPublicItem(item, lang) {
     isBreaking: Boolean(item.isBreaking),
     isIndia: Boolean(item.isIndia),
     isMpStatewide: Boolean(item.isMpStatewide),
+    topic: item.topic || null,
   };
 }
 
@@ -450,18 +543,20 @@ function normalizeItem(item, feed) {
 
   let category = feed.category;
   let categoryEn = feed.categoryEn || feed.category;
-  if (district) {
-    category = district.hi;
-    categoryEn = district.en;
-  } else if (division) {
-    category = division.hi;
-    categoryEn = division.en;
-  } else if (feed.region === "mp") {
-    category = "मध्य प्रदेश";
-    categoryEn = "Madhya Pradesh";
-  } else if (india >= 6) {
-    category = "देश";
-    categoryEn = "India";
+  if (!feed.keepCategory) {
+    if (district) {
+      category = district.hi;
+      categoryEn = district.en;
+    } else if (division) {
+      category = division.hi;
+      categoryEn = division.en;
+    } else if (feed.region === "mp") {
+      category = "मध्य प्रदेश";
+      categoryEn = "Madhya Pradesh";
+    } else if (india >= 6) {
+      category = "देश";
+      categoryEn = "India";
+    }
   }
 
   const normalized = {
@@ -479,6 +574,7 @@ function normalizeItem(item, feed) {
     lang: feed.lang,
     category,
     categoryEn,
+    topic: feed.topic || null,
     regionScore: score,
     indiaScore: india,
     isBreaking: breaking,
